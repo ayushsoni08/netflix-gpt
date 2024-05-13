@@ -3,9 +3,9 @@ import Header from './Header'
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import { addUser } from '../utils/userSlice';
 import { useDispatch } from 'react-redux';
+import { USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
     const [isSignIn, setIsSignIn] = useState(true);
@@ -16,7 +16,6 @@ const Login = () => {
     const password = useRef(null);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const handleBtnClick = () => {
         const message = checkValidData(email.current.value, password.current.value);
@@ -34,7 +33,7 @@ const Login = () => {
                     const user = userCredential.user;
                     updateProfile(user, {
                         displayName: name.current.value, 
-                        photoURL: "https://media.licdn.com/media/AAYQAQSOAAgAAQAAAAAAAB-zrMZEDXI2T62PSuT6kpB6qg.png"
+                        photoURL: USER_AVATAR
                     })
                         .then(() => {
                             const {uid, email, displayName, photoURL} = auth.currentUser;
@@ -46,7 +45,6 @@ const Login = () => {
                                     photoURL: photoURL,
                                 })
                             )
-                            navigate('/browse');
                         }).catch((error) => {
                             setErrorMessage(error.message);
                         });
@@ -67,7 +65,6 @@ const Login = () => {
             )
                 .then((userCredential)=>{
                     const user = userCredential.user;
-                    navigate('/browse');
                 })
                 .catch((error)=> {
                     const errorCode = error.code;
@@ -124,4 +121,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Login 
