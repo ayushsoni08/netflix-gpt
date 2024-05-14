@@ -31,7 +31,10 @@
 - Build Secondary Container
 - Build Movie list & Movie card
 - TMDB Image CDN URL
-- usePopular, useTopRated custom hooks.
+- usePopular, useTopRated custom hooks
+- GPT Search Page
+- GPT Search Bar
+- Multi-language feature in our app
 
 # Features
 
